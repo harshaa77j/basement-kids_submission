@@ -1,0 +1,17 @@
+import pandas as pd
+
+df = pd.read_csv("subscriptions.csv")
+plan_rates = {"Premium": 12.99, "Standard": 7.99, "Student Plan": 4.99}
+df["amount"] = df["plan_type"].map(plan_rates)
+df["payment_date"] = pd.to_datetime(df["payment_date"])
+df["valid_until"] = pd.to_datetime(df["valid_until"])
+df = df.sort_values(by=["user_id", "payment_date"])
+overlap_idxs = []
+for uid, data in df.groupby("user_id"):
+    prev_end = None
+    for i, row in data.iterrows():
+        if prev_end and row["payment_date"] < prev_end:
+            overlap_idxs.append(i)
+        prev_end = row["valid_until"]
+df.drop(index=overlap_idxs, inplace=True)
+df.to_csv("cleaned_subscriptions.csv", index=False)

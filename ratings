@@ -1,0 +1,19 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv("ratings.csv")
+med=df.loc[(df["rating"]>=0)&(df["rating"]<=5),"rating"].median()
+df["rating"]=df["rating"].apply(lambda x:med if x<0 or x>5 else x)
+df1=df.drop_duplicates(subset=["Column1","Column2"],keep="first")
+df.to_csv("ratingsclean.csv",index=False)
+
+import pandas as pd
+import numpy as np
+df=pd.read_csv("ratingsclean.csv")
+df=df.drop_duplicates(subset=["user_id","movie_id"],keep="first")
+df.to_csv("ratingsclean1.csv",index=False)
+
+import pandas as pd
+import numpy as np
+df=pd.read_csv("ratingsclean1.csv")
+df1=df[df['rating'].apply(lambda x:x.is_integer())]
+df1.to_csv("ratingsclean2.csv",index=False)

@@ -1,0 +1,9 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv("watch_history2.csv")
+mov=pd.read_csv("movies_2.csv")
+sub=pd.read_csv("subscriptions.csv")
+f=df[df["user_id"].isin(sub["user_id"])]
+fd=f[f["movie_id"].isin(mov["movie_id"])]
+fd=fd.reset_index(drop=True)
+fd.to_csv("watch_history3.csv",index="False")

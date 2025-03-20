@@ -1,0 +1,8 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv("watch_history.csv")
+d="device_type"
+ex=["Laptop","Mobile","Mobile","Smart TV"]
+m=df[d].mode()[0]
+df[d]=df[d].apply(lambda x:m if pd.isna(x) or x not in ex else x)
+dff.to_csv("watch_history2.csv",index=False)

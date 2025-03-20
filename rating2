@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+df=pd.read_csv("ratingsclean.csv")
+df=df.drop_duplicates(subset=["user_id","movie_id"],keep="first")
+df.to_csv("ratingsclean1.csv",index=False)

@@ -1,3 +1,11 @@
 # basement-kids
-The python codes used for data cleaning include mainly pandas libraries that use dataframes to organize and give structure to the csv files.It has been installed using:
-!pip install pandas
+The project aims to **clean and analyse data** for a hypothetical streaming company.
+
+## Description
+This repository contains Python scripts to clean and analyse the company's data.  
+The main library used is **pandas**, which enables efficient data manipulation through DataFrames to organize and structure CSV files.
+
+## Installation
+Ensure you have pandas installed:
+```bash
+pip install pandas
